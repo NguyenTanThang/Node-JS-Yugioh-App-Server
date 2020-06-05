@@ -149,7 +149,7 @@ const editAttribute = async (req, res) => {
             })
         }
 
-        let attribute = await Attribute.findByIdAndUpdate(id, {name});
+        let attribute = await Attribute.findByIdAndUpdate(id, {name, imageURL});
         attribute = await Attribute.findById(id);
 
         return res.status(200).json({
