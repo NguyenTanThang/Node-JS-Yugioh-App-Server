@@ -424,6 +424,106 @@ const removeMonsterCardOfDeck = async (req, res) => {
     }
 }
 
+const removeSpellCardOfDeck = async (req, res) => {
+    try {
+        const {cardID, deckID} = req.params;
+        const monsterCard = await SpellCard.findById(cardID);
+        let deck = await Deck.findById(deckID);
+
+        if (!monsterCard) {
+            return res.status(400).json({
+                success: false,
+                data: null,
+                message: `The monster card with that ID does not exist`
+            })
+        }
+
+        if (!deck) {
+            return res.status(400).json({
+                success: false,
+                data: null,
+                message: `The ${APP_NAME} card with that ID does not exist`
+            })
+        }
+
+        let listOfMonsterCards = deck.spellCards;
+
+        for (let index = 0; index < listOfMonsterCards.length; index++) {
+            const monsterCard = listOfMonsterCards[index];
+            if (monsterCard === cardID){
+                listOfMonsterCards.splice(index, 1)
+                break;
+            }
+        }
+
+        deck = await Deck.findByIdAndUpdate(deckID, {spellCards: listOfMonsterCards});
+        deck = await Deck.findById(deckID);
+        
+        return res.status(200).json({
+            success: true,
+            data: deck,
+            message: `Successfully updated an ${APP_NAME}`
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: `Internal Server Error`
+        })
+    }
+}
+
+const removeTrapCardOfDeck = async (req, res) => {
+    try {
+        const {cardID, deckID} = req.params;
+        const monsterCard = await TrapCard.findById(cardID);
+        let deck = await Deck.findById(deckID);
+
+        if (!monsterCard) {
+            return res.status(400).json({
+                success: false,
+                data: null,
+                message: `The monster card with that ID does not exist`
+            })
+        }
+
+        if (!deck) {
+            return res.status(400).json({
+                success: false,
+                data: null,
+                message: `The ${APP_NAME} card with that ID does not exist`
+            })
+        }
+
+        let listOfMonsterCards = deck.trapCards;
+
+        for (let index = 0; index < listOfMonsterCards.length; index++) {
+            const monsterCard = listOfMonsterCards[index];
+            if (monsterCard === cardID){
+                listOfMonsterCards.splice(index, 1)
+                break;
+            }
+        }
+
+        deck = await Deck.findByIdAndUpdate(deckID, {trapCards: listOfMonsterCards});
+        deck = await Deck.findById(deckID);
+        
+        return res.status(200).json({
+            success: true,
+            data: deck,
+            message: `Successfully updated an ${APP_NAME}`
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: `Internal Server Error`
+        })
+    }
+}
+
 module.exports = {
     getDecks,
     getDeckByID,
@@ -434,5 +534,7 @@ module.exports = {
     addTrapCardToDeck,
     addMonsterCardToDeck,
     getDecksByUserID,
-    removeMonsterCardOfDeck
+    removeMonsterCardOfDeck,
+    removeSpellCardOfDeck,
+    removeTrapCardOfDeck
 }
