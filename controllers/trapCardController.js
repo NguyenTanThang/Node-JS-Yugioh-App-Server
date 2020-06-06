@@ -154,7 +154,7 @@ const editCard = async (req, res) => {
         }
 
         cards = cards.filter(cardItem => {
-            return cardItem._id != existedCard._id
+            return cardItem._id != id
         })
 
         for (let index = 0; index < cards.length; index++) {

@@ -374,6 +374,56 @@ const getDecksByUserID = async (req, res) => {
     }
 }
 
+const removeMonsterCardOfDeck = async (req, res) => {
+    try {
+        const {cardID, deckID} = req.params;
+        const monsterCard = await Card.findById(cardID);
+        let deck = await Deck.findById(deckID);
+
+        if (!monsterCard) {
+            return res.status(400).json({
+                success: false,
+                data: null,
+                message: `The monster card with that ID does not exist`
+            })
+        }
+
+        if (!deck) {
+            return res.status(400).json({
+                success: false,
+                data: null,
+                message: `The ${APP_NAME} card with that ID does not exist`
+            })
+        }
+
+        let listOfMonsterCards = deck.monsterCards;
+
+        for (let index = 0; index < listOfMonsterCards.length; index++) {
+            const monsterCard = listOfMonsterCards[index];
+            if (monsterCard === cardID){
+                listOfMonsterCards.splice(index, 1)
+                break;
+            }
+        }
+
+        deck = await Deck.findByIdAndUpdate(deckID, {monsterCards: listOfMonsterCards});
+        deck = await Deck.findById(deckID);
+        
+        return res.status(200).json({
+            success: true,
+            data: deck,
+            message: `Successfully updated an ${APP_NAME}`
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: `Internal Server Error`
+        })
+    }
+}
+
 module.exports = {
     getDecks,
     getDeckByID,
@@ -383,5 +433,6 @@ module.exports = {
     addSpellCardToDeck,
     addTrapCardToDeck,
     addMonsterCardToDeck,
-    getDecksByUserID
+    getDecksByUserID,
+    removeMonsterCardOfDeck
 }

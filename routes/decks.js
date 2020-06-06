@@ -9,7 +9,8 @@ const {
     addSpellCardToDeck,
     addTrapCardToDeck,
     addMonsterCardToDeck,
-    getDecksByUserID
+    getDecksByUserID,
+    removeMonsterCardOfDeck
 } = require("../controllers/deckController")
 
 router.get('/', getDecks);
@@ -29,5 +30,7 @@ router.put('/spell-card/:cardID/deck/:deckID', addSpellCardToDeck);
 router.put('/trap-card/:cardID/deck/:deckID', addTrapCardToDeck);
 
 router.put('/monster-card/:cardID/deck/:deckID', addMonsterCardToDeck);
+
+router.delete('/monster-card/:cardID/deck/:deckID', removeMonsterCardOfDeck);
 
 module.exports = router;
