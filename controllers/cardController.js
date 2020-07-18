@@ -109,11 +109,11 @@ const deleteCard = async (req, res) => {
 const editCard = async (req, res) => {
     try {
         const {id} = req.params;
-        const {name, typeID, attributeID, imageURL} = req.body;
+        const {name, typeID, attributeID, imageURL, categoryIDs} = req.body;
         let cards = await Card.find();
         let isUnique = true;
         
-        if (!name || !typeID || !attributeID || !imageURL) {
+        if (!name || !typeID || !attributeID || !imageURL || !categoryIDs) {
             return res.status(400).json({
                 success: false,
                 data: null,
