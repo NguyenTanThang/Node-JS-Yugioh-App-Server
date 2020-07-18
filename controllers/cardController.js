@@ -38,9 +38,9 @@ const getCardByID = async (req, res) => {
 
 const addCard = async (req, res) => {
     try {
-        const {name, typeID, attributeID, description, levels, atk, def, imageURL} = req.body;
+        const {name, typeID, attributeID, description, levels, atk, def, imageURL, categoryID} = req.body;
         
-        if (!name || !typeID || !attributeID || !imageURL) {
+        if (!name || !typeID || !attributeID || !imageURL || !categoryID) {
             return res.status(400).json({
                 success: false,
                 data: null,
@@ -58,7 +58,8 @@ const addCard = async (req, res) => {
             })
         }
 
-        const card = await new Card({name, typeID, attributeID, description, levels, atk, def, imageURL}).save();
+        const categoryIDs = [categoryID];
+        const card = await new Card({name, typeID, attributeID, description, levels, atk, def, imageURL, categoryIDs}).save();
 
         return res.status(200).json({
             success: true,
