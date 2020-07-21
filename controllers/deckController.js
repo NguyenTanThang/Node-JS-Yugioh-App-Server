@@ -83,6 +83,7 @@ const addDeck = async (req, res) => {
             })
         }
 
+        /*
         const existedDeck = await Deck.findOne({name});
 
         if (existedDeck) {
@@ -92,6 +93,7 @@ const addDeck = async (req, res) => {
                 message: `The name of an ${APP_NAME} must be unique`
             })
         }
+        */
         
         const existedUser = await User.findById(userID)
 
@@ -184,7 +186,7 @@ const editDeck = async (req, res) => {
             })
         }
 
-        if (existedUser._id !== existedDeck.userID){
+        if (existedUser._id != existedDeck.userID){
             return res.status(400).json({
                 success: false,
                 data: null,
