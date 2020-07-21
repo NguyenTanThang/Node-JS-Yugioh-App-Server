@@ -194,6 +194,7 @@ const editDeck = async (req, res) => {
             })
         }
 
+        /*
         decks = decks.filter(deckItem => {
             return deckItem._id != existedDeck._id
         })
@@ -213,6 +214,7 @@ const editDeck = async (req, res) => {
                 message: `The name of an ${APP_NAME} must be unique`
             })
         }
+        */
 
         let deck = await Deck.findByIdAndUpdate(id, {name});
         deck = await Deck.findById(id);
@@ -220,7 +222,7 @@ const editDeck = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: deck,
-            message: `Successfully updated an ${APP_NAME}`
+            message: `Successfully updated a ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
@@ -262,7 +264,7 @@ const addSpellCardToDeck = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: deck,
-            message: `Successfully updated an ${APP_NAME}`
+            message: `Successfully updated a ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
@@ -304,7 +306,7 @@ const addTrapCardToDeck = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: deck,
-            message: `Successfully updated an ${APP_NAME}`
+            message: `Successfully updated a ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
@@ -346,7 +348,7 @@ const addMonsterCardToDeck = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: deck,
-            message: `Successfully updated an ${APP_NAME}`
+            message: `Successfully updated a ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
@@ -414,7 +416,7 @@ const removeMonsterCardOfDeck = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: deck,
-            message: `Successfully updated an ${APP_NAME}`
+            message: `Successfully updated a ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
@@ -464,7 +466,7 @@ const removeSpellCardOfDeck = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: deck,
-            message: `Successfully updated an ${APP_NAME}`
+            message: `Successfully updated a ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
@@ -514,7 +516,7 @@ const removeTrapCardOfDeck = async (req, res) => {
         return res.status(200).json({
             success: true,
             data: deck,
-            message: `Successfully updated an ${APP_NAME}`
+            message: `Successfully updated a ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
