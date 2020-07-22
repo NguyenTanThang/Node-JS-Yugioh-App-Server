@@ -179,7 +179,7 @@ const changePassword = async (req, res) => {
             })
         }
 
-        if (compare(oldPassword, existedUser.password)){
+        if (!compare(oldPassword, existedUser.password)){
             return res.status(400).json({
                 success: false,
                 data: null,
