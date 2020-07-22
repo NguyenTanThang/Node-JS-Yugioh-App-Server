@@ -15,6 +15,10 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    avatarURL: {
+        type: String,
+        default: "https://image.flaticon.com/icons/png/512/103/103085.png"
+    },
     created_date: {
         type: Date,
         default: Date.now()

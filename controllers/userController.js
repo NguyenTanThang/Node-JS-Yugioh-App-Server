@@ -118,7 +118,7 @@ const login = async (req, res) => {
 const changeProfile = async (req, res) => {
     try {
         const {id} = req.params;
-        const {username} = req.body;
+        const {username, avatarURL} = req.body;
         
         if (!username) {
             return res.status(400).json({
@@ -138,7 +138,7 @@ const changeProfile = async (req, res) => {
             })
         }
 
-        let user = await User.findByIdAndUpdate(id, {username});
+        let user = await User.findByIdAndUpdate(id, {username, avatarURL});
         user = await User.findById(id);
 
         return res.status(200).json({
