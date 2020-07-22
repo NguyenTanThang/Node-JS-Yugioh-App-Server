@@ -26,12 +26,14 @@ const getDeckByID = async (req, res) => {
     try {
         const {id} = req.params;
         const deck = await Deck.findById(id);
-        const {spellCards, trapCards, monsterCards} = deck;
+        const {spellCards, trapCards, monsterCards, userID} = deck;
         let returnedSpellCards = [];
         let returnedTrapCards = [];
         let returnedMonsterCards = [];
 
         console.log({spellCards, trapCards, monsterCards})
+
+        const user = await User.findById(userID);
 
         for (let index = 0; index < spellCards.length; index++) {
             const spellCardID = spellCards[index];
@@ -51,12 +53,13 @@ const getDeckByID = async (req, res) => {
             returnedMonsterCards.push(monsterCardItem)
         }
 
-        console.log({returnedSpellCards, returnedTrapCards, returnedMonsterCards})
+        console.log({returnedSpellCards, returnedTrapCards, returnedMonsterCards, user})
 
         return res.status(200).json({
             success: true,
             data: {
                 deck,
+                user,
                 spellCards: returnedSpellCards,
                 trapCards: returnedTrapCards,
                 monsterCards: returnedMonsterCards

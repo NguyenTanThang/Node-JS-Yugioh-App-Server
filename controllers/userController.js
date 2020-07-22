@@ -138,7 +138,7 @@ const changeProfile = async (req, res) => {
             })
         }
 
-        let user = await User.findByIdAndUpdate(id, {username, avatarURL});
+        let user = await User.findByIdAndUpdate(id, req.body);
         user = await User.findById(id);
 
         return res.status(200).json({
