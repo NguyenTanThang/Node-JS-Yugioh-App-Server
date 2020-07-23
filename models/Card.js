@@ -23,6 +23,10 @@ const schema = new Schema({
         type: String,
         default: "N/A"
     },
+    pendulumDescription: {
+        type: String,
+        default: null
+    },
     levels: {
         type: Number,
         default: 0
@@ -38,6 +42,10 @@ const schema = new Schema({
     categoryIDs: {
         type: [String],
         default: []
+    },
+    pendulumScale: {
+        type: Number,
+        default: null
     },
     created_date: {
         type: Date,
