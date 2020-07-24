@@ -19,6 +19,7 @@ var trapCategoriesRouter = require('./routes/trap-categories');
 var spellCardsRouter = require('./routes/spell-cards');
 var trapCardsRouter = require('./routes/trap-cards');
 var deckRouter = require('./routes/decks');
+var blogRouter = require('./routes/blogs');
 var userRouter = require('./routes/users');
 
 var app = express();
@@ -40,6 +41,7 @@ app.use('/cards', cardsRouter);
 app.use('/spell-cards', spellCardsRouter);
 app.use('/trap-cards', trapCardsRouter);
 app.use('/decks', deckRouter);
+app.use('/blogs', blogRouter);
 app.use('/users', userRouter);
 
 // catch 404 and forward to error handler
